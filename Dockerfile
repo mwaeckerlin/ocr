@@ -13,8 +13,9 @@ env MAXPIXELS=40000000
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y pdfsandwich cron poppler-utils
+RUN apt-get install -y pdfsandwich inotify-tools poppler-utils
+RUN apt-get install -y tesseract-ocr-.*
 
-ADD ocr.sh /etc/cron.hourly/ocr
+ADD ocr.sh /ocr.sh
 ADD start.sh /start.sh
 CMD /start.sh
