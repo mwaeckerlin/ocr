@@ -3,8 +3,8 @@ MAINTAINER mwaeckerlin
 env TERM=xterm
 
 env INPUT_DIR=/home/ftp/upload
-env OUTPUT_DIR=/boar/dokumente
-env CONFIG_DIR=/boar/configs/scan
+env OUTPUT_DIR=/data/dokumente
+env CONFIG_DIR=/data/configs/scan
 env TMP_DIR=/tmp
 env LANGUAGE=deu
 env RESOLUTION=600
