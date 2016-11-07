@@ -14,12 +14,13 @@ do_file() {
                         while read l; do
                             if grep -qi "$l" "${out%.pdf}.txt"; then
                                 target+="-$(echo $l | tr '[:upper:] ' '[:lower:]-')"
+                                break
                             fi
                         done < "$c"
                     fi
                 done
                 echo "++++ new file ${target}-${f##*/}"
-                mv "${out}" "${target}${f##*/}" && rm "$f"
+                mv "${out}" "${target}-${f##*/}" && rm "$f"
             else
                 echo "**** WARNING pdfsandwich failed"
                 echo "++++ new file ${target}${f##*/}"
@@ -42,7 +43,9 @@ if test $# -gt 0; then
         shift
     done
 else
-    for f in ${INPUT_DIR}/*.pdf; do
-        do_file "$f"
+    for f in ${INPUT_DIR}/*; do
+        if test -f ${f}; then
+            do_file "$f"
+        fi
     done
 fi
