@@ -1,7 +1,7 @@
 #! /bin/bash
 
 for f in "${INPUT_DIR}" "${OUTPUT_DIR}" "${CONFIG_DIR}" "${TMP_DIR}"; do
-    test -d "$f" || mkdir -p "$f"
+    test -d "$f" || ( mkdir -p "$f" && chown -R boar.boar "$f" )
 done
 
 /ocr.sh

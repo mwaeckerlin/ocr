@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM boar-data
 MAINTAINER mwaeckerlin
 env TERM=xterm
 

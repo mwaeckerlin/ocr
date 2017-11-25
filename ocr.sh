@@ -21,16 +21,22 @@ do_file() {
                 done
                 echo "++++ new file ${target}-${f##*/}"
                 mv "${out}" "${target}-${f##*/}" && rm "$f"
+                chown -R boar.boar "${target}-${f##*/}"
+                chmod -R ugo+rw "${target}-${f##*/}"
             else
                 echo "**** WARNING pdfsandwich failed"
                 echo "++++ new file ${target}${f##*/}"
                 mv "${f}" "${target}${f##*/}"
+                chown -R boar.boar "${target}-${f##*/}"
+                chmod -R ugo+rw "${target}-${f##*/}"
             fi
         else
             target="${OUTPUT_DIR}/$(date +%Y%m%d-)"
             out="$f"
             echo "++++ new file ${target}${f##*/}"
             mv "${out}" "${target}${f##*/}"
+            chown -R boar.boar "${target}-${f##*/}"
+            chmod -R ugo+rw "${target}-${f##*/}"
         fi
     else
         echo "**** ERROR not a file $f"
