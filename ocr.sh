@@ -61,28 +61,27 @@ function process_file() {
                 chown -R boar.boar "${rotated}"
                 chmod -R +rw "${rotated}"
                 ;;
-            (${ROTATEPASS_DIR}*.jpg)
-                rotated="${filename%.jpg}-rotated.jpg"
-                rotated="${OUTPUT_DIR}/$(date +%Y%m%d-)${rotated##*/}"
-                echo ".... rotating jpg $filename"
-                jpegtran -rotate 90 -outfile "${rotated}" "${filename}"
-                echo "++++ new file ${rotated}"
-                chown -R boar.boar "${rotated}"
-                chmod -R +rw "${rotated}"
-                ;;
-            (${PASS_DIR}*)
-                target="${OUTPUT_DIR}/$(date +%Y%m%d-)${filename##*/}"
-                mv "${filename}" "${target}"
-                echo "++++ new file ${target}"
-                chown -R boar.boar "${target}"
-                chmod -R +rw "${target}"
-                ;;
-            (*)
-                echo "**** ERROR: Unknown file: ${filename}" 1>&2
-                exit 1
-                ;;
-        esac
-    done
+        (${ROTATEPASS_DIR}*.jpg)
+            rotated="${filename%.jpg}-rotated.jpg"
+            rotated="${OUTPUT_DIR}/$(date +%Y%m%d-)${rotated##*/}"
+            echo ".... rotating jpg $filename"
+            jpegtran -rotate 90 -outfile "${rotated}" "${filename}"
+            echo "++++ new file ${rotated}"
+            chown -R boar.boar "${rotated}"
+            chmod -R +rw "${rotated}"
+            ;;
+        (${PASS_DIR}*)
+            target="${OUTPUT_DIR}/$(date +%Y%m%d-)${filename##*/}"
+            mv "${filename}" "${target}"
+            echo "++++ new file ${target}"
+            chown -R boar.boar "${target}"
+            chmod -R +rw "${target}"
+            ;;
+        (*)
+            echo "**** ERROR: Unknown file: ${filename}" 1>&2
+            exit 1
+            ;;
+    esac
 }
 
 if test $# -eq 0; then
