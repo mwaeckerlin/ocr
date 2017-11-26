@@ -1,2 +1,4 @@
-# ocr
 Docker Image for Automated Optical Character Recognition in PDF to Create Sandwich Files
+========================================================================================
+
+To be connected to `mwaeckerlin/vsftpd`, mount `/data` from `mwaeckerlin/boar-data`. Use a printer that sends scanned PDFs through FTP, such as a Brother MFC-9340CDW. Printer stores documents in `mwaeckerlin/vsftpd`. If the doument is stored in ftp folder `upload`, this image automatcally runs optical character recognition, creates a filename from the recognized text and the configuration in `/data/configs/scan` and stores it in `/data/dokumente`. Then `mwaeckerlin/boar-data` checks in the result to `mwaeckerlin/boar`. If the printer sends the file to ftp folder `rotated`, then the file is rotated before character recognition. If the printer sends the file to ftp folder `pass`, then the file is moved to the target without any change. If the printer sends the file to ftp folder `rotate-pass`, then the file is rotated, then moved to the target without character recognition.
