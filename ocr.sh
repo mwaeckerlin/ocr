@@ -89,7 +89,7 @@ if test $# -eq 0; then
         process_file "$f"
     done
 else
-    while test $# -qt 0; do
+    while test $# -gt 0; do
         process_file "$1"
         shift
     done
