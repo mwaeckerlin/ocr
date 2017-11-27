@@ -1,8 +1,13 @@
 #! /bin/bash -e
 
-for f in "${INPUT_DIR}" "${ROTATE_DIR}" "${ROTATEPASS_DIR}" "${PASS_DIR}" "${OUTPUT_DIR}" "${CONFIG_DIR}" "${TMP_DIR}"; do
+for f in "${INPUT_DIR}" "${ROTATE_DIR}" "${ROTATEPASS_DIR}" "${PASS_DIR}" "${OUTPUT_DIR}" "${TMP_DIR}"; do
     test -d "$f" || mkdir -p "$f"
-    chmod +rwx "$f"
+    chown boar.boar "$f"
+    chmod ugo+rwx "$f"
+done
+for f in "${CONFIG_DIR}"; do
+    test -d "$f" || mkdir -p "$f"
+    chmod ugo+rx "$f"
 done
 
 /ocr.sh

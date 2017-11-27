@@ -20,13 +20,13 @@ function do_ocr() {
         echo "++++ new file ${target}-${f##*/}"
         mv "${out}" "${target}-${f##*/}" && rm "$f"
         chown -R boar.boar "${target}-${f##*/}"
-        chmod -R +rw "${target}-${f##*/}"
+        chmod -R ugo+rw "${target}-${f##*/}"
     else
         echo "**** WARNING pdfsandwich failed"
         echo "++++ new file ${target}${f##*/}"
         mv "${f}" "${target}${f##*/}"
         chown -R boar.boar "${target}-${f##*/}"
-        chmod -R +rw "${target}-${f##*/}"
+        chmod -R ugo+rw "${target}-${f##*/}"
     fi
 }
 
@@ -59,7 +59,7 @@ function process_file() {
                 fi
                 echo "++++ new file ${rotated}"
                 chown -R boar.boar "${rotated}"
-                chmod -R +rw "${rotated}"
+                chmod -R ugo+rw "${rotated}"
                 ;;
         (${ROTATEPASS_DIR}*.jpg)
             rotated="${filename%.jpg}-rotated.jpg"
@@ -68,14 +68,14 @@ function process_file() {
             jpegtran -rotate 90 -outfile "${rotated}" "${filename}"
             echo "++++ new file ${rotated}"
             chown -R boar.boar "${rotated}"
-            chmod -R +rw "${rotated}"
+            chmod -R ugo+rw "${rotated}"
             ;;
         (${PASS_DIR}*)
             target="${OUTPUT_DIR}/$(date +%Y%m%d-)${filename##*/}"
             mv "${filename}" "${target}"
             echo "++++ new file ${target}"
             chown -R boar.boar "${target}"
-            chmod -R +rw "${target}"
+            chmod -R ugo+rw "${target}"
             ;;
         (*)
             echo "**** ERROR: Unknown file: ${filename}" 1>&2
