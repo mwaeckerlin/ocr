@@ -33,10 +33,10 @@ function do_ocr() {
 function process_file() {
     filename="$1"
     case "${filename}" in
-        (${INPUT_DIR}*.pdf)
+        (${INPUT_DIR}/*.pdf)
             do_ocr "${filename}"
             ;;
-        (${ROTATE_DIR}*.pdf)
+        (${ROTATE_DIR}/*.pdf)
             rotated="${filename%.pdf}-rotated.pdf"
             rotated="${OUTPUT_DIR}/${rotated##*/}"
             echo ".... rotating pdf $filename"
@@ -48,7 +48,7 @@ function process_file() {
                 do_ocr "${filename}"
             fi
             ;;
-        (${ROTATEPASS_DIR}*.pdf)
+        (${ROTATEPASS_DIR}/*.pdf)
                 rotated="${filename%.pdf}-rotated.pdf"
                 rotated="${OUTPUT_DIR}/$(date +%Y%m%d-)${rotated##*/}"
                 echo ".... rotating pdf $filename"
@@ -61,7 +61,7 @@ function process_file() {
                 chown -R boar.boar "${rotated}"
                 chmod -R ugo+rw "${rotated}"
                 ;;
-        (${ROTATEPASS_DIR}*.jpg)
+        (${ROTATEPASS_DIR}/*.jpg)
             rotated="${filename%.jpg}-rotated.jpg"
             rotated="${OUTPUT_DIR}/$(date +%Y%m%d-)${rotated##*/}"
             echo ".... rotating jpg $filename"
@@ -70,7 +70,7 @@ function process_file() {
             chown -R boar.boar "${rotated}"
             chmod -R ugo+rw "${rotated}"
             ;;
-        (${PASS_DIR}*)
+        (${PASS_DIR}/*)
             target="${OUTPUT_DIR}/$(date +%Y%m%d-)${filename##*/}"
             mv "${filename}" "${target}"
             echo "++++ new file ${target}"
